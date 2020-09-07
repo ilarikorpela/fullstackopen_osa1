@@ -19,6 +19,26 @@ const App = () => {
   const goodGrade = () => setGood(good + 1);
   const neutralGrade = () => setNeutral(neutral + 1);
   const badGrade = () => setBad(bad + 1);
+  const sum = () => {
+    return good + neutral + bad;
+  };
+  const averageCalc = () => {
+    const Score = good * 1 + neutral * 0 + bad * -1;
+
+    const average = Score / sum();
+    if (sum() === 0) {
+      return 0;
+    }
+    return average;
+  };
+
+  const positiveCalc = () => {
+    if (sum() === 0) {
+      return 0;
+    } else {
+      return (good / sum()) * 100;
+    }
+  };
 
   return (
     <div>
@@ -30,6 +50,9 @@ const App = () => {
       <p>good: {good}</p>
       <p>neutral: {neutral}</p>
       <p>bad: {bad}</p>
+      <p>Total: {sum()}</p>
+      <p>Average: {averageCalc()}</p>
+      <p>Positive: {positiveCalc()}</p>
     </div>
   );
 };
