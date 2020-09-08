@@ -1,8 +1,43 @@
-import ReactDOM from "react-dom";
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
 const Header = (props) => {
   return <h1>{props.header}</h1>;
+};
+
+const Statistics = ({ statistics, good, bad, neutral }) => {
+  const sum = () => {
+    return good + neutral + bad;
+  };
+
+  const averageCalc = () => {
+    const value = good * 1 + neutral * 0 + bad * -1;
+
+    const average = value / sum();
+    if (sum() === 0) {
+      return 0;
+    }
+    console.log(average);
+    return average;
+  };
+
+  const positiveCalc = () => {
+    if (sum() === 0) {
+      return 0;
+    }
+    return (good / sum()) * 100;
+  };
+  return (
+    <div>
+      <Header header={statistics} />
+      <p>good: {good}</p>
+      <p>neutral: {neutral}</p>
+      <p>bad: {bad}</p>
+      <p>Total: {sum()}</p>
+      <p>Average: {averageCalc()}</p>
+      <p>Positive: {positiveCalc()}</p>
+    </div>
+  );
 };
 
 const Button = (props) => {
@@ -19,26 +54,6 @@ const App = () => {
   const goodGrade = () => setGood(good + 1);
   const neutralGrade = () => setNeutral(neutral + 1);
   const badGrade = () => setBad(bad + 1);
-  const sum = () => {
-    return good + neutral + bad;
-  };
-  const averageCalc = () => {
-    const Score = good * 1 + neutral * 0 + bad * -1;
-
-    const average = Score / sum();
-    if (sum() === 0) {
-      return 0;
-    }
-    return average;
-  };
-
-  const positiveCalc = () => {
-    if (sum() === 0) {
-      return 0;
-    } else {
-      return (good / sum()) * 100;
-    }
-  };
 
   return (
     <div>
@@ -46,13 +61,12 @@ const App = () => {
       <Button handleClick={goodGrade} text="Good" />
       <Button handleClick={neutralGrade} text="Neutral" />
       <Button handleClick={badGrade} text="Bad" />
-      <Header header={statistics} />
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p>Total: {sum()}</p>
-      <p>Average: {averageCalc()}</p>
-      <p>Positive: {positiveCalc()}</p>
+      <Statistics
+        statistics={statistics}
+        good={good}
+        neutral={neutral}
+        bad={bad}
+      />
     </div>
   );
 };
