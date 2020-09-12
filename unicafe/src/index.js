@@ -27,6 +27,14 @@ const Statistics = ({ statistics, good, bad, neutral }) => {
     }
     return (good / sum()) * 100;
   };
+  if (sum() === 0) {
+    return (
+      <div>
+        <Header header={statistics} />
+        <p>No feedback given</p>
+      </div>
+    );
+  }
   return (
     <div>
       <Header header={statistics} />
