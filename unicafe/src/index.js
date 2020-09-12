@@ -5,7 +5,19 @@ const Header = (props) => {
   return <h1>{props.header}</h1>;
 };
 
-const Statistics = ({ statistics, good, bad, neutral }) => {
+const Statistical = ({ text, value }) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
+
+const Button = (props) => {
+  return <button onClick={props.handleClick}>{props.text}</button>;
+};
+
+const Statistics = ({ statistical, good, bad, neutral }) => {
   const sum = () => {
     return good + neutral + bad;
   };
@@ -30,26 +42,21 @@ const Statistics = ({ statistics, good, bad, neutral }) => {
   if (sum() === 0) {
     return (
       <div>
-        <Header header={statistics} />
         <p>No feedback given</p>
       </div>
     );
   }
   return (
     <div>
-      <Header header={statistics} />
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p>Total: {sum()}</p>
-      <p>Average: {averageCalc()}</p>
-      <p>Positive: {positiveCalc()}</p>
+      <Header header={statistical} />
+      <Statistical text="good: " value={good} />
+      <Statistical text="neutral: " value={neutral} />
+      <Statistical text="bad: " value={bad} />
+      <Statistical text="all: " value={sum()} />
+      <Statistical text="average: " value={averageCalc()} />
+      <Statistical text="positive:  " value={positiveCalc()} />
     </div>
   );
-};
-
-const Button = (props) => {
-  return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
 const App = () => {
