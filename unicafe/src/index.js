@@ -7,9 +7,10 @@ const Header = (props) => {
 
 const Statistical = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-    </p>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   );
 };
 
@@ -49,12 +50,16 @@ const Statistics = ({ statistical, good, bad, neutral }) => {
   return (
     <div>
       <Header header={statistical} />
-      <Statistical text="good: " value={good} />
-      <Statistical text="neutral: " value={neutral} />
-      <Statistical text="bad: " value={bad} />
-      <Statistical text="all: " value={sum()} />
-      <Statistical text="average: " value={averageCalc()} />
-      <Statistical text="positive:  " value={positiveCalc()} />
+      <table>
+        <tbody>
+          <Statistical text="good: " value={good} />
+          <Statistical text="neutral: " value={neutral} />
+          <Statistical text="bad: " value={bad} />
+          <Statistical text="all: " value={sum()} />
+          <Statistical text="average: " value={averageCalc()} />
+          <Statistical text="positive:  " value={positiveCalc()} />
+        </tbody>
+      </table>
     </div>
   );
 };
